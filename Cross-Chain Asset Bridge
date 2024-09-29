@@ -1,0 +1,25 @@
+import requests
+
+def bridge_assets(amount, from_chain, to_chain, from_address, to_address, asset):
+    url = f"https://bridge-api.connext.network/transfer"
+    payload = {
+        "amount": amount,
+        "from_chain": from_chain,
+        "to_chain": to_chain,
+        "from_address": from_address,
+        "to_address": to_address,
+        "asset": asset
+    }
+    response = requests.post(url, json=payload)
+    return response.json()
+
+if __name__ == "__main__":
+    amount = input("Enter amount: ")
+    from_chain = input("Enter from chain: ")
+    to_chain = input("Enter to chain: ")
+    from_address = input("Enter your address on source chain: ")
+    to_address = input("Enter your address on destination chain: ")
+    asset = input("Enter asset symbol (e.g., USDC): ")
+    
+    result = bridge_assets(amount, from_chain, to_chain, from_address, to_address, asset)
+    print(result)
